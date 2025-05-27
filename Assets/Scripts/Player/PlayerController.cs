@@ -5,7 +5,8 @@ namespace RealmRush.Player
     public class PlayerController : MonoBehaviour
     {
         [SerializeField] private Transform _fireTransform;
-        [SerializeField] private GameObject _bulletPrefab;
+        [SerializeField] private GameObject _fireParticle;
+        [SerializeField] private GameObject _hitParticle;
         [SerializeField] private Camera playerCamera;
         [SerializeField] private float walkSpeed = 6f;
         [SerializeField] private float runSpeed = 12f;
@@ -83,10 +84,13 @@ namespace RealmRush.Player
         {
             RaycastHit hit;
             
-            if (Physics.Raycast(_fireTransform.position, transform.TransformDirection(Vector3.forward), out hit,
+            if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.TransformDirection(Vector3.forward), out hit,
                     Mathf.Infinity))
             {
-                Debug.DrawRay(_fireTransform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
+                Debug.DrawRay(playerCamera.transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
+                
+                Instantiate(_fireParticle,_fireTransform.position, Quaternion.identity);
+                Instantiate(_hitParticle, hit.point, Quaternion.identity);
             }
         }
     }
