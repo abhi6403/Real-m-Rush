@@ -1,3 +1,4 @@
+using RealmRush.Enemy;
 using UnityEngine;
 
 namespace RealmRush.Player
@@ -17,6 +18,7 @@ namespace RealmRush.Player
 
         private Vector3 moveDirection = Vector3.zero;
         private float rotationX = 0;
+        private float damage = 25f;
         private CharacterController characterController;
 
         private bool canMove = true;
@@ -88,9 +90,16 @@ namespace RealmRush.Player
                     Mathf.Infinity))
             {
                 Debug.DrawRay(playerCamera.transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
-                
+                EnemyController enemy = hit.transform.GetComponent<EnemyController>();
+
+                if (enemy != null)
+                {
+                    enemy.TakeDamage(damage);
+                }
                 Instantiate(_fireParticle,_fireTransform.position, Quaternion.identity);
                 Instantiate(_hitParticle, hit.point, Quaternion.identity);
+                
+                
             }
         }
     }
