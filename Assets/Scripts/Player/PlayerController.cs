@@ -4,6 +4,8 @@ namespace RealmRush.Player
 {
     public class PlayerController : MonoBehaviour
     {
+        [SerializeField] private Transform _fireTransform;
+        [SerializeField] private GameObject _bulletPrefab;
         [SerializeField] private Camera playerCamera;
         [SerializeField] private float walkSpeed = 6f;
         [SerializeField] private float runSpeed = 12f;
@@ -29,6 +31,10 @@ namespace RealmRush.Player
         {
             Movement();
             MouseRotation();
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                Shooting();
+            }
         }
 
         private void Movement()
@@ -70,6 +76,17 @@ namespace RealmRush.Player
                 rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
                 playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
                 transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
+            }
+        }
+
+        private void Shooting()
+        {
+            RaycastHit hit;
+            
+            if (Physics.Raycast(_fireTransform.position, transform.TransformDirection(Vector3.forward), out hit,
+                    Mathf.Infinity))
+            {
+                Debug.DrawRay(_fireTransform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
             }
         }
     }

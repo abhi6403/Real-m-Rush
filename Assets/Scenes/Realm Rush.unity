@@ -2208,6 +2208,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e425edbb55086634db571e508cbac9fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _fireTransform: {fileID: 578997940}
+  _bulletPrefab: {fileID: 8467432668343577441, guid: e65c559f762b5d146a4aa82cf3722fe5, type: 3}
   playerCamera: {fileID: 963194227}
   walkSpeed: 6
   runSpeed: 12
