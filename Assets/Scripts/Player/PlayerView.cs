@@ -1,6 +1,4 @@
 using UnityEngine;
-using RealmRush.Enemy;
-using UnityEngine.InputSystem;
 
 namespace RealmRush.Player
 {

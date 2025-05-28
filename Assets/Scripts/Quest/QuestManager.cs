@@ -64,6 +64,8 @@ namespace RealmRush.Quest
             if (allComplete)
             {
                 Debug.Log("All quests completed!");
+                GameService.Instance.EventService.OnGameCompleted.InvokeEvent();
+                Time.timeScale = 0;
             }
         }
     }

@@ -6,19 +6,17 @@
   <component name="ChangeListManager">
     <list default="true" id="8d72cf91-5c19-47ca-8a2b-0fda9a6fdd3d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Realm Rush/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Realm Rush/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Matthew Guz/Hits Effects FREE/Prefab/Basic Hit 2.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Matthew Guz/Hits Effects FREE/Prefab/Basic Hit 2.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Matthew Guz/Hits Effects FREE/Prefab/Lightning Hit Blue.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Matthew Guz/Hits Effects FREE/Prefab/Lightning Hit Blue.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Realm Rush.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Realm Rush.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ScriptableObjects/Explore Quest.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ScriptableObjects/Explore Quest.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ScriptableObjects/Fetch Quest.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ScriptableObjects/Fetch Quest.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ScriptableObjects/Kill Quest.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ScriptableObjects/Kill Quest.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Interactions/CollectibleItem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Interactions/CollectibleItem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Interactions/ExploredArea.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Interactions/ExploredArea.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Events/EventService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Events/EventService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Main/GameService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Main/GameService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerView.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Quest/ExploreQuestSO.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Quest/ExploreQuestSO.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Quest/FetchQuestSO.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Quest/FetchQuestSO.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Quest/KillQuestSO.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Quest/KillQuestSO.cs.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Quest/QuestManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Quest/QuestManager.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -35,8 +33,8 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Interactions/ExploredArea.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Main/GameService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Player/PlayerModel.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Quest/ExploreQuestSO.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Quest/QuestManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/UIService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.universal@a394fe607f89/Shaders/Lit.shader" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
@@ -113,7 +111,7 @@
       <option name="presentableId" value="Default" />
       <updated>1748333027757</updated>
       <workItem from="1748333029306" duration="18300000" />
-      <workItem from="1748395962629" duration="19108000" />
+      <workItem from="1748395962629" duration="23336000" />
     </task>
     <servers />
   </component>

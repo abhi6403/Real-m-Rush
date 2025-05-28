@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using RealmRush.Events;
 using RealmRush.Player;
 using RealmRush.Quest;
+using RealmRush.UI;
 using UnityEngine;
 
 namespace RealmRush.Main
@@ -29,6 +30,9 @@ namespace RealmRush.Main
         public EventService EventService { get; private set; }
         public QuestManager QuestManager { get; private set; }
         
+        [SerializeField]private UIService _uiService;
+        public UIService UIService => _uiService;
+        
         [SerializeField] private PlayerView playerView;
         [SerializeField] private List<QuestSO> quests = new List<QuestSO>();
 
@@ -37,6 +41,7 @@ namespace RealmRush.Main
             EventService = new EventService();
             QuestManager = new QuestManager(quests);
             PlayerController playerController = new PlayerController(playerView);
+            _uiService.AddListensers();
         }
     }
 }
