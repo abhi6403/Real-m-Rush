@@ -12,38 +12,29 @@ namespace RealmRush.Player
         public Camera playerCamera;
         
         private PlayerController _playerController;
-        public CharacterController _characterController { get; private set; }
+        public CharacterController characterController { get; private set; }
 
         void Start()
         {
-            _characterController = GetComponent<CharacterController>();
+            characterController = GetComponent<CharacterController>();
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
         }
 
-        void Update()
-        {
-            _playerController.Update();
-        }
+        void Update() => _playerController.Update();
+        
+        public void PlayFireEffect() => fireParticleEffect.Play();
 
         public void SetPlayerController(PlayerController playerController)
         {
             _playerController = playerController;
         }
         
-        public void PlayFireEffect()
-        {
-            fireParticleEffect.Play();
-        }
-
         public GameObject PlayHitEffect(Vector3 hitPosition)
-        {
-                return Instantiate(hitParticleEffect, hitPosition, hitParticleEffect.transform.rotation);
+        { 
+            return Instantiate(hitParticleEffect, hitPosition, hitParticleEffect.transform.rotation);
         }
 
-        public void DestroyHitEffect(GameObject hitParticleEffect)
-        {
-            Destroy(hitParticleEffect,2f);
-        }
+        public void DestroyHitEffect(GameObject hitParticleEffect) => Destroy(hitParticleEffect,2f);
     }
 }

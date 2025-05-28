@@ -1,5 +1,4 @@
 using RealmRush.Quest;
-using UnityEngine;
 
 namespace RealmRush.Events
 {

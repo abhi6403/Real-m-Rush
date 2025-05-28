@@ -25,7 +25,7 @@ namespace RealmRush.Quest
         private void CompleteQuest()
         {
             isCompleted = true;
-            Debug.Log($"Explore Quest Completed");
+            Debug.Log("Explore Quest Completed");
         }
     }
 }

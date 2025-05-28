@@ -1,6 +1,5 @@
 using RealmRush.Main;
 using RealmRush.Player;
-using RealmRush.Quest;
 using UnityEngine;
 
 namespace RealmRush.Interactions

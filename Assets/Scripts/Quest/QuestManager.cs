@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using RealmRush.Main;
@@ -68,6 +67,7 @@ namespace RealmRush.Quest
         private void CheckForCompletion()
         {
             bool allComplete = _activeQuests.All(q => q.isCompleted);
+            
             if (allComplete)
             {
                 Debug.Log("All quests completed!");

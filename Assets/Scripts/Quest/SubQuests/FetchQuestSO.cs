@@ -29,7 +29,7 @@ namespace RealmRush.Quest
         private void CompleteQuest()
         {
             isCompleted = true;
-            Debug.Log("Quest complete");
+            Debug.Log("Fetch Quest complete");
         }
     }
 }

@@ -19,13 +19,9 @@ namespace RealmRush.Player
         {
             HandleMovement();
             CameraMovement();
-            
-            if (Input.GetKeyDown(KeyCode.Mouse0))
-            {
-                Shooting();
-            }
+            Shooting();
         }
-
+        
         private void HandleMovement()
         {
             Vector3 forward = _playerView.transform.forward;
@@ -43,17 +39,17 @@ namespace RealmRush.Player
             _playerModel.moveDirection = (forward * inputX + right * inputY) * speed;
             _playerModel.moveDirection.y = groundY;
             
-            if(Input.GetButtonDown("Jump") && _playerView._characterController.isGrounded)
+            if(Input.GetButtonDown("Jump") && _playerView.characterController.isGrounded)
             {
                 _playerModel.moveDirection.y = _playerModel.jumpPower;
             }
-
-            if (!_playerView._characterController.isGrounded)
+            
+            if (!_playerView.characterController.isGrounded)
             {
                 _playerModel.moveDirection.y -= _playerModel.gravity * Time.deltaTime;
             }
             
-            _playerView._characterController.Move(_playerModel.moveDirection * Time.deltaTime);
+            _playerView.characterController.Move(_playerModel.moveDirection * Time.deltaTime);
         }
 
         private void CameraMovement()
@@ -74,13 +70,18 @@ namespace RealmRush.Player
         {
             if (Input.GetMouseButtonDown(0))
             {
-                Ray ray = _playerView.playerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
-                if (Physics.Raycast(ray, out RaycastHit hit))
+                RaycastHit hit;
+
+                if (Physics.Raycast(_playerView.playerCamera.transform.position,
+                        _playerView.playerCamera.transform.TransformDirection(Vector3.forward), out hit,
+                        Mathf.Infinity))
                 {
+                    EnemyController enemy = hit.transform.GetComponent<EnemyController>();
+
                     _playerView.PlayFireEffect();
                     GameObject tempHit = _playerView.PlayHitEffect(hit.point);
 
-                    if (hit.transform.TryGetComponent(out EnemyController enemy))
+                    if (enemy != null)
                     {
                         enemy.TakeDamage(_playerModel.damage);
                     }

@@ -1,4 +1,3 @@
-using System;
 using RealmRush.Main;
 using RealmRush.Quest;
 using TMPro;
@@ -12,8 +11,7 @@ namespace RealmRush.UI
         [SerializeField] private TextMeshProUGUI _killsQuestText;
         [SerializeField] private TextMeshProUGUI _exploredQuestText;
         [SerializeField] private TextMeshProUGUI _gameCompletedText;
-
-
+        
         public void Initialize()
         {
             AddListensers();
