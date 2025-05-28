@@ -60,7 +60,7 @@ namespace RealmRush.Quest
             bool allComplete = activeQuests.All(q => q.isCompleted);
             if (allComplete)
             {
-                Debug.Log("🎉 All quests completed!");
+                Debug.Log("All quests completed!");
             }
         }
     }
