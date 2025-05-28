@@ -2,8 +2,6 @@ using UnityEngine;
 
 namespace MatthewAssets
 {
-
-
     public class ParticleRotationController : MonoBehaviour
     {
         public ParticleSystem particleSystem; // Asigna el sistema de partículas en el Inspector
