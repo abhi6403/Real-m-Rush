@@ -6,19 +6,22 @@ using UnityEngine;
 
 namespace RealmRush.Quest
 {
-    public class QuestManager : MonoBehaviour
+    public class QuestManager
     {
-        public List<QuestSO> activeQuests = new List<QuestSO>();
-
-        private void Start()
+        public List<QuestSO> _activeQuests;
+        public QuestManager(List<QuestSO> activeQuests)
         {
+            _activeQuests = activeQuests;
+            
             foreach (QuestSO quest in activeQuests)
             {
                 quest.Initialize();
             }
+            
+            AddListeners();
         }
 
-        public void AddListeners()
+        private void AddListeners()
         {
             GameService.Instance.EventService.OnItemCollected.AddListener(HandleItemCollected);
             GameService.Instance.EventService.OnKilled.AddListener(HandleEnemyKilled);
@@ -27,7 +30,7 @@ namespace RealmRush.Quest
         
         private void HandleItemCollected()
         {
-            foreach (var quest in activeQuests.OfType<FetchQuestSO>())
+            foreach (var quest in _activeQuests.OfType<FetchQuestSO>())
             {
                 if (!quest.isCompleted) quest.OnProgress();
             }
@@ -37,7 +40,7 @@ namespace RealmRush.Quest
 
         private void HandleEnemyKilled()
         {
-            foreach (var quest in activeQuests.OfType<KillQuestSO>())
+            foreach (var quest in _activeQuests.OfType<KillQuestSO>())
             {
                 if (!quest.isCompleted) quest.OnProgress();
             }
@@ -47,7 +50,7 @@ namespace RealmRush.Quest
 
         private void HandleAreaExplored()
         {
-            foreach (var quest in activeQuests.OfType<ExploreQuestSO>())
+            foreach (var quest in _activeQuests.OfType<ExploreQuestSO>())
             {
                 if (!quest.isCompleted) quest.OnProgress();
             }
@@ -57,7 +60,7 @@ namespace RealmRush.Quest
 
         private void CheckForCompletion()
         {
-            bool allComplete = activeQuests.All(q => q.isCompleted);
+            bool allComplete = _activeQuests.All(q => q.isCompleted);
             if (allComplete)
             {
                 Debug.Log("All quests completed!");

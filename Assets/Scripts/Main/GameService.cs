@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using RealmRush.Events;
+using RealmRush.Player;
 using RealmRush.Quest;
 using UnityEngine;
 
@@ -25,12 +27,16 @@ namespace RealmRush.Main
             }
         }
         public EventService EventService { get; private set; }
-        public QuestManager QuestManager;
+        public QuestManager QuestManager { get; private set; }
+        
+        [SerializeField] private PlayerView playerView;
+        [SerializeField] private List<QuestSO> quests = new List<QuestSO>();
 
         public void Start()
         {
             EventService = new EventService();
-            QuestManager.AddListeners();
+            QuestManager = new QuestManager(quests);
+            PlayerController playerController = new PlayerController(playerView);
         }
     }
 }

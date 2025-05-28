@@ -9,7 +9,7 @@ namespace RealmRush.Interactions
     {
         private void OnTriggerEnter(Collider other)
         {
-            if (other.GetComponent<PlayerController>())
+            if (other.GetComponent<PlayerView>())
             {
                 GameService.Instance.EventService.OnItemCollected.InvokeEvent();
                 Destroy(gameObject);

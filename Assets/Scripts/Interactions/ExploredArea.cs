@@ -8,7 +8,7 @@ namespace RealmRush.Interactions
     {
         private void OnTriggerEnter(Collider other)
         {
-            if (other.GetComponent<PlayerController>())
+            if (other.GetComponent<PlayerView>())
             {
                 GameService.Instance.EventService.OnExplored.InvokeEvent();
                 gameObject.SetActive(false);

@@ -1,105 +1,93 @@
 using RealmRush.Enemy;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace RealmRush.Player
 {
-    public class PlayerController : MonoBehaviour
+    public class PlayerController 
     {
-        [SerializeField] private Transform _fireTransform;
-        [SerializeField] private GameObject _fireParticle;
-        [SerializeField] private GameObject _hitParticle;
-        [SerializeField] private Camera playerCamera;
-        [SerializeField] private float walkSpeed = 6f;
-        [SerializeField] private float runSpeed = 12f;
-        [SerializeField] private float jumpPower = 7f;
-        [SerializeField] private float gravity = 10f;
-        [SerializeField] private float lookSpeed = 2f;
-        [SerializeField] private float lookXLimit = 45f;
-
-        private Vector3 moveDirection = Vector3.zero;
-        private float rotationX = 0;
-        private float damage = 25f;
-        private CharacterController characterController;
-
-        private bool canMove = true;
-
-        void Start()
+        private PlayerView _playerView;
+        private PlayerModel _playerModel;
+        
+        public PlayerController(PlayerView playerView)
         {
-            characterController = GetComponent<CharacterController>();
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+            _playerModel = new PlayerModel();
+            _playerView = playerView;
+            _playerView.SetPlayerController(this);
         }
 
-        void Update()
+        public void Update()
         {
-            Movement();
-            MouseRotation();
+            HandleMovement();
+            CameraMovement();
+            
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
                 Shooting();
             }
         }
 
-        private void Movement()
+        private void HandleMovement()
         {
-            Vector3 forward = transform.TransformDirection(Vector3.forward);
-            Vector3 right = transform.TransformDirection(Vector3.right);
-
+            Vector3 forward = _playerView.transform.forward;
+            Vector3 right = _playerView.transform.right;
+            
             bool isRunning = Input.GetKey(KeyCode.LeftShift);
             
-            float curSpeedX = canMove ? (isRunning ? runSpeed : walkSpeed) * Input.GetAxis("Vertical") : 0;
-            float curSpeedY = canMove ? (isRunning ? runSpeed : walkSpeed) * Input.GetAxis("Horizontal") : 0;
+            float speed = isRunning ? _playerModel.runSpeed : _playerModel.walkSpeed;
             
-            float movementDirectionY = moveDirection.y;
+            float inputX = Input.GetAxis("Vertical");
+            float inputY = Input.GetAxis("Horizontal");
+
+            float groundY = _playerModel.moveDirection.y;
             
-            moveDirection = (forward * curSpeedX) + (right * curSpeedY);
+            _playerModel.moveDirection = (forward * inputX + right * inputY) * speed;
+            _playerModel.moveDirection.y = groundY;
             
-            if (Input.GetButton("Jump") && canMove && characterController.isGrounded)
+            if(Input.GetButtonDown("Jump") && _playerView._characterController.isGrounded)
             {
-                moveDirection.y = jumpPower;
-            }
-            else
-            {
-                moveDirection.y = movementDirectionY;
+                _playerModel.moveDirection.y = _playerModel.jumpPower;
             }
 
-            if (!characterController.isGrounded)
+            if (!_playerView._characterController.isGrounded)
             {
-                moveDirection.y -= gravity * Time.deltaTime;
+                _playerModel.moveDirection.y -= _playerModel.gravity * Time.deltaTime;
             }
             
-            characterController.Move(moveDirection * Time.deltaTime);
+            _playerView._characterController.Move(_playerModel.moveDirection * Time.deltaTime);
         }
 
-        private void MouseRotation()
+        private void CameraMovement()
         {
-            if (canMove)
-            {
-                rotationX += -Input.GetAxis("Mouse Y") * lookSpeed;
-                rotationX = Mathf.Clamp(rotationX, -lookXLimit, lookXLimit);
-                playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
-                transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
-            }
+            if (!_playerModel.canMove) return;
+
+            float mouseX = Input.GetAxis("Mouse X") * _playerModel.lookSpeed;
+            float mouseY = Input.GetAxis("Mouse Y") * _playerModel.lookSpeed;
+            
+            _playerModel.rotationX -= mouseY;
+            _playerModel.rotationX = Mathf.Clamp(_playerModel.rotationX, -_playerModel.lookXLimit,_playerModel.lookXLimit);
+            
+            _playerView.playerCamera.transform.localRotation = Quaternion.Euler(_playerModel.rotationX, 0, 0);
+            _playerView.transform.Rotate(Vector3.up * mouseX);
         }
 
         private void Shooting()
         {
-            RaycastHit hit;
-            
-            if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.TransformDirection(Vector3.forward), out hit,
-                    Mathf.Infinity))
+            if (Input.GetMouseButtonDown(0))
             {
-                Debug.DrawRay(playerCamera.transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
-                EnemyController enemy = hit.transform.GetComponent<EnemyController>();
-
-                if (enemy != null)
+                Ray ray = _playerView.playerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+                if (Physics.Raycast(ray, out RaycastHit hit))
                 {
-                    enemy.TakeDamage(damage);
+                    _playerView.PlayFireEffect();
+                    GameObject tempHit = _playerView.PlayHitEffect(hit.point);
+
+                    if (hit.transform.TryGetComponent(out EnemyController enemy))
+                    {
+                        enemy.TakeDamage(_playerModel.damage);
+                    }
+
+                    _playerView.DestroyHitEffect(tempHit);
                 }
-                Instantiate(_fireParticle,_fireTransform.position, Quaternion.identity);
-                Instantiate(_hitParticle, hit.point, Quaternion.identity);
-                
-                
             }
         }
     }
