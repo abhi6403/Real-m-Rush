@@ -1,3 +1,4 @@
+using RealmRush.Main;
 using RealmRush.Player;
 using RealmRush.Quest;
 using UnityEngine;
@@ -10,6 +11,7 @@ namespace RealmRush.Interactions
         {
             if (other.GetComponent<PlayerController>())
             {
+                GameService.Instance.EventService.OnItemCollected.InvokeEvent();
                 Destroy(gameObject);
             }
         }

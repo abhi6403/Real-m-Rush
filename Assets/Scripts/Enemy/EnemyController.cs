@@ -1,3 +1,4 @@
+using RealmRush.Main;
 using UnityEngine;
 
 namespace RealmRush.Enemy
@@ -10,6 +11,7 @@ namespace RealmRush.Enemy
         {
             if (_Health <= 0)
             {
+                GameService.Instance.EventService.OnKilled.InvokeEvent();
                 Destroy(gameObject);
             }
             else
