@@ -12,14 +12,26 @@ namespace RealmRush.UI
         [SerializeField] private TextMeshProUGUI _killsQuestText;
         [SerializeField] private TextMeshProUGUI _exploredQuestText;
         [SerializeField] private TextMeshProUGUI _gameCompletedText;
-        
 
-        public void AddListensers()
+
+        public void Initialize()
+        {
+            AddListensers();
+        }
+        private void AddListensers()
         {
             GameService.Instance.EventService.OnFetchQuest.AddListener(SetCollectiblesQuestText);
             GameService.Instance.EventService.OnKillQuest.AddListener(SetKillsQuestText);
             GameService.Instance.EventService.OnExplore.AddListener(SetExploredQuestText);
             GameService.Instance.EventService.OnGameCompleted.AddListener(EnableGameCompletedText);
+        }
+
+        ~UIService()
+        {
+            GameService.Instance.EventService.OnFetchQuest.RemoveListener(SetCollectiblesQuestText);
+            GameService.Instance.EventService.OnKillQuest.RemoveListener(SetKillsQuestText);
+            GameService.Instance.EventService.OnExplore.RemoveListener(SetExploredQuestText);
+            GameService.Instance.EventService.OnGameCompleted.RemoveListener(EnableGameCompletedText);
         }
         private void SetCollectiblesQuestText(QuestSO quest)
         {

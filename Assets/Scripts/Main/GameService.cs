@@ -3,32 +3,16 @@ using RealmRush.Events;
 using RealmRush.Player;
 using RealmRush.Quest;
 using RealmRush.UI;
+using RealmRush.Utilities;
 using UnityEngine;
 
 namespace RealmRush.Main
 {
-    public class GameService : MonoBehaviour
+    public class GameService : GenericMonoSingleton<GameService>
     {
-        private static GameService _instance;
-
-        public static GameService Instance
-        {
-            get { return _instance; }
-        }
-
-        protected virtual void Awake()
-        {
-            if (_instance == null)
-            {
-                _instance = this;
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
-        }
         public EventService EventService { get; private set; }
         public QuestManager QuestManager { get; private set; }
+        public PlayerService PlayerService { get; private set; }
         
         [SerializeField]private UIService _uiService;
         public UIService UIService => _uiService;
@@ -40,8 +24,8 @@ namespace RealmRush.Main
         {
             EventService = new EventService();
             QuestManager = new QuestManager(quests);
-            PlayerController playerController = new PlayerController(playerView);
-            _uiService.AddListensers();
+            PlayerService = new PlayerService(playerView);
+            _uiService.Initialize();
         }
     }
 }

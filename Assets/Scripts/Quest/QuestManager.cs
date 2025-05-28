@@ -27,6 +27,13 @@ namespace RealmRush.Quest
             GameService.Instance.EventService.OnKilled.AddListener(HandleEnemyKilled);
             GameService.Instance.EventService.OnExplored.AddListener(HandleAreaExplored);
         }
+
+        ~QuestManager()
+        {
+            GameService.Instance.EventService.OnItemCollected.RemoveListener(HandleItemCollected);
+            GameService.Instance.EventService.OnKilled.RemoveListener(HandleEnemyKilled);
+            GameService.Instance.EventService.OnExplored.RemoveListener(HandleAreaExplored);
+        }
         
         private void HandleItemCollected()
         {
