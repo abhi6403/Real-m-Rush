@@ -26,7 +26,21 @@ namespace RealmRush.Editables
 
         private void OnGUI()
         {
+            GUILayout.Label("Create New Quest", EditorStyles.boldLabel);
+            EditorGUILayout.Space();
             
+            GeneralFields();
+            
+        }
+
+        private void GeneralFields()
+        {
+            _questType = (QuestType)EditorGUILayout.EnumPopup("Quest Type", _questType);
+            
+            _questTitle = EditorGUILayout.TextField("Quest Name", _questTitle);
+            
+            _questDescription = EditorGUILayout.TextField("Description", _questDescription);
+            _goalCount = EditorGUILayout.IntField("Goal", _goalCount);
         }
     }
 }
