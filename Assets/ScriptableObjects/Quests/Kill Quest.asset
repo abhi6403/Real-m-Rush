@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 450440ceb0b881f4bbf434c7861d009d, type: 3}
   m_Name: Kill Quest
   m_EditorClassIdentifier: 
+  questType: 1
   questName: kill
   questDescription: dsadasd
   goalCount: 3
-  rewardText: wasdasd
+  reward: 0
   currentCount: 0
   isCompleted: 0
+  killPrefab: {fileID: 0}

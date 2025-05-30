@@ -1,6 +1,7 @@
 using RealmRush.Quest;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Windows;
 
 namespace RealmRush.Editables
 {
@@ -17,6 +18,8 @@ namespace RealmRush.Editables
         private GameObject _enemyObject;
 
         private GameObject _exploreZone;
+        
+        private const string questSavePath = "Assets/ScriptableObjects/Quests/";
 
         [MenuItem("RealmRush Tools/ Quest Editor")]
         public static void OpenQuestWindow()
@@ -32,7 +35,8 @@ namespace RealmRush.Editables
             GeneralFields();
             QuestTypeFields();
             
-            
+            EditorGUILayout.Space();
+            SetCreateButton();
         }
 
         private void GeneralFields()
@@ -64,6 +68,54 @@ namespace RealmRush.Editables
                     _reward = EditorGUILayout.IntField("Reward", _reward);
                     break;
             }
+        }
+
+        private void SetCreateButton()
+        {
+            if (GUILayout.Button("Create New Quest"))
+            {
+                CreateQuest();
+            }
+        }
+
+        private void CreateQuest()
+        {
+            QuestSO questSO = null;
+
+            switch (_questType)
+            {
+                case QuestType.FETCH:
+                    var fetchQuestSO = ScriptableObject.CreateInstance<FetchQuestSO>();
+                    fetchQuestSO.collectiblePrefab = _collectibleObject;
+                    fetchQuestSO.reward = _reward;
+                    questSO = fetchQuestSO;
+                    break;
+                case QuestType.KILL:
+                    var killQuestSO = ScriptableObject.CreateInstance<KillQuestSO>();
+                    killQuestSO.killPrefab = _enemyObject;
+                    killQuestSO.reward = _reward;
+                    questSO = killQuestSO;
+                    break;
+                case QuestType.EXPLORE:
+                    var exploreQuestSO = ScriptableObject.CreateInstance<ExploreQuestSO>();
+                    exploreQuestSO.exploreTrigger = _exploreZone;
+                    exploreQuestSO.reward = _reward;
+                    questSO = exploreQuestSO;
+                    break;
+            }
+            
+            questSO.questName = _questTitle;
+            questSO.questDescription = _questDescription;
+            questSO.goalCount = _goalCount;
+            questSO.questType = _questType;
+            
+            Directory.CreateDirectory(questSavePath);
+            
+            string saveTitle = _questTitle.Replace(" ", "_");
+            string assetPath = $"{questSavePath}{saveTitle}_{_questType}.asset";
+            
+            AssetDatabase.CreateAsset(questSO, assetPath);
+            AssetDatabase.SaveAssets();
         }
     }
 }

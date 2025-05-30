@@ -7,6 +7,7 @@ namespace RealmRush.Quest
     
     public class FetchQuestSO : QuestSO
     {
+        public GameObject collectiblePrefab;
         public override void Initialize()
         {
             currentCount = 0;

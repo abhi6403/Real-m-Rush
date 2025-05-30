@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2203359bec717b428d71b506199b72d, type: 3}
   m_Name: Explore Quest
   m_EditorClassIdentifier: 
+  questType: 2
   questName: Explore
   questDescription: asdasd
   goalCount: 1
-  rewardText: dsadas
+  reward: 0
   currentCount: 0
   isCompleted: 0
+  exploreTrigger: {fileID: 0}
