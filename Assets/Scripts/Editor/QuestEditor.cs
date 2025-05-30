@@ -74,7 +74,10 @@ namespace RealmRush.Editables
         {
             if (GUILayout.Button("Create New Quest"))
             {
-                CreateQuest();
+                if (CheckForAllFilledFields())
+                {
+                    CreateQuest();
+                }
             }
         }
 
@@ -116,6 +119,60 @@ namespace RealmRush.Editables
             
             AssetDatabase.CreateAsset(questSO, assetPath);
             AssetDatabase.SaveAssets();
+        }
+
+        private bool CheckForAllFilledFields()
+        {
+            if (string.IsNullOrWhiteSpace(_questTitle))
+            {
+                EditorUtility.DisplayDialog("Quest title is empty.","Please enter the title","Do it now");
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(_questDescription))
+            {
+                EditorUtility.DisplayDialog("Quest description is empty.","Please enter description","Do it now");
+                return false;
+            }
+            
+            if (_goalCount < 1)
+            {
+                EditorUtility.DisplayDialog("Invalid goal count.","Please enter a valid goal count","Do it now");
+                return false;
+            }
+            
+            switch (_questType)
+            {
+                case QuestType.FETCH:
+                    if (!_collectibleObject)
+                    {
+                        EditorUtility.DisplayDialog("Empty Object","Please add an game object","Do it now");
+                        return false;
+                    }
+                    break;
+                case QuestType.KILL:
+                    if (!_enemyObject)
+                    {
+                        EditorUtility.DisplayDialog("Empty Object","Please add an game object","Do it now");
+                        return false;
+                    }
+                    break;
+                case QuestType.EXPLORE:
+                    if (!_exploreZone)
+                    {
+                        EditorUtility.DisplayDialog("Empty Object","Please add an game object","Do it now");
+                        return false;
+                    }
+                    break;
+            }
+
+            if (_reward < 1)
+            {
+                EditorUtility.DisplayDialog("Quest reward is empty.","Please enter reward","Do it now");
+                return false;
+            }
+            
+           return true;
         }
     }
 }
