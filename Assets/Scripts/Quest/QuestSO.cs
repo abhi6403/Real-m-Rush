@@ -7,7 +7,7 @@ namespace RealmRush.Quest
         public string questName;
         public string questDescription;
         public int goalCount;
-        public string rewardText;
+        public int rewardText;
         
         [HideInInspector] public int currentCount;
         [HideInInspector] public bool isCompleted;

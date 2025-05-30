@@ -30,6 +30,8 @@ namespace RealmRush.Editables
             EditorGUILayout.Space();
             
             GeneralFields();
+            QuestTypeFields();
+            
             
         }
 
@@ -41,6 +43,27 @@ namespace RealmRush.Editables
             
             _questDescription = EditorGUILayout.TextField("Description", _questDescription);
             _goalCount = EditorGUILayout.IntField("Goal", _goalCount);
+        }
+
+        private void QuestTypeFields()
+        {
+            EditorGUILayout.Space();
+
+            switch (_questType)
+            {
+                case QuestType.FETCH:
+                    _collectibleObject = (GameObject)EditorGUILayout.ObjectField("Collectible", _collectibleObject, typeof(GameObject));
+                    _reward = EditorGUILayout.IntField("Reward", _reward);
+                    break;
+                case QuestType.KILL:
+                    _enemyObject = (GameObject)EditorGUILayout.ObjectField("Enemy Object",_enemyObject, typeof(GameObject));
+                    _reward = EditorGUILayout.IntField("Reward", _reward);
+                    break;
+                case QuestType.EXPLORE:
+                    _exploreZone = (GameObject)EditorGUILayout.ObjectField("Explore Zone", _exploreZone, typeof(GameObject));
+                    _reward = EditorGUILayout.IntField("Reward", _reward);
+                    break;
+            }
         }
     }
 }
