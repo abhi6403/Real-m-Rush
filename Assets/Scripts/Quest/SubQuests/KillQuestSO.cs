@@ -7,6 +7,7 @@ namespace RealmRush.Quest
     
     public class KillQuestSO : QuestSO
     {
+        public GameObject killPrefab;
         public override void Initialize()
         {
             currentCount = 0;

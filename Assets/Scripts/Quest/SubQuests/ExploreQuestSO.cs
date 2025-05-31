@@ -6,6 +6,7 @@ namespace RealmRush.Quest
     [CreateAssetMenu(fileName = "New Explore Quest", menuName = "Quests/Explore Quest")]
     public class ExploreQuestSO : QuestSO
     {
+        public GameObject exploreTrigger;
         public override void Initialize()
         {
             currentCount = 0;
