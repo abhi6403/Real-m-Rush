@@ -35,3 +35,33 @@ The quest system is built to be **scalable**, **modular**, and **extensible** us
 
 - Used AI for Planning the project.
 - Video Link : https://drive.google.com/file/d/1NE7mA_XmWuEqkg46iKHh4OmZK7AyJu7B/view?usp=drive_link
+
+---
+
+# Realm Rush – Quest & Game Data Editor Tool
+
+## 📋 Tool Overview
+A Unity Editor tool for designers to create, edit, and manage quest data as ScriptableObjects — no coding required.
+
+## 🚀 Features
+- Create Fetch, Kill, and Explore quests
+- User-friendly editor window
+- Dynamic fields based on quest type
+- Validation and feedback
+- Inline tooltips and help text
+- Data saved to `Assets/ScriptableObjects/Quests/`
+
+## 🧰 Tool Usage
+1. Open via `RealmRush Tools > Quest Editor`
+2. Choose Quest Type
+3. Fill out required fields
+4. Click **Create Quest**
+
+## 🏗️ Architecture
+- `QuestBase.cs`: Base abstract ScriptableObject
+- Specific quest types: `FetchQuest.cs`, `KillQuest.cs`, `ExploreQuest.cs`
+- `QuestEditor.cs`: UnityEditor tool handling logic and UI
+
+## 🧠 AI Usage
+- Referred Youtube for gaining knowledge of editor windows.
+- Used AI for planning the project and to Add comments. 
