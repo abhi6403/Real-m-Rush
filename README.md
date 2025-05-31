@@ -59,8 +59,8 @@ A Unity Editor tool for designers to create, edit, and manage quest data as Scri
 4. Click **Create Quest**
 
 ## 🏗️ Architecture
-- `QuestBase.cs`: Base abstract ScriptableObject
-- Specific quest types: `FetchQuest.cs`, `KillQuest.cs`, `ExploreQuest.cs`
+- `QuestSO.cs`: Base abstract ScriptableObject
+- Specific quest types: `FetchQuestSO.cs`, `KillQuestSO.cs`, `ExploreQuestSO.cs`
 - `QuestEditor.cs`: UnityEditor tool handling logic and UI
 
 ## 🧠 AI Usage
