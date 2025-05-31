@@ -9,25 +9,26 @@ namespace RealmRush.Editables
     public class QuestEditor : EditorWindow
     {
         #region VariablesForCreatingNewQuest
-
+        
+        // General quest properties
           private string _questTitle;
           private string _questDescription;
           private int _goalCount;
           private QuestType _questType;
           private int _reward;
           
+          // Type-specific references
           private GameObject _collectibleObject;
-  
           private GameObject _enemyObject;
-  
           private GameObject _exploreZone;
           
-          private const string questSavePath = "Assets/ScriptableObjects/Quests/";
+          private const string questSavePath = "Assets/ScriptableObjects/Quests/";                      // Path where quests will be saved
 
         #endregion
         
         #region VariablesForExistingQuests
 
+        // For loading and selecting existing quests
         private string[] existingQuestPaths;
         private QuestSO[] existingQuests;
         private int selectedQuestIndex;
@@ -35,7 +36,7 @@ namespace RealmRush.Editables
         
         #endregion
         
-        [MenuItem("RealmRush Tools/ Quest Editor")]
+        [MenuItem("RealmRush Tools/ Quest Editor")]                             // Adds this window to the Unity editor under the "RealmRush Tools" menu
         public static void OpenQuestWindow()
         {
             GetWindow<QuestEditor>("Quest Editor");
@@ -63,6 +64,7 @@ namespace RealmRush.Editables
 
         #region MethodsForCreatingNewQuest
         
+        // Draw general quest fields (common to all types)
         private void GeneralFields()
         {
             _questType = (QuestType)EditorGUILayout.EnumPopup("Quest Type", _questType);
@@ -75,6 +77,7 @@ namespace RealmRush.Editables
             _goalCount = EditorGUILayout.IntField("Goal", _goalCount);
         }
 
+        // Draw fields specific to the selected quest type
         private void QuestTypeFields()
         {
             EditorGUILayout.Space();
@@ -96,6 +99,7 @@ namespace RealmRush.Editables
             }
         }
 
+        // Button to trigger quest creation
         private void SetCreateButton()
         {
             if (GUILayout.Button("Create New Quest"))
@@ -107,6 +111,7 @@ namespace RealmRush.Editables
             }
         }
 
+        // Instantiates the appropriate ScriptableObject and saves it to disk
         private void CreateQuest()
         {
             QuestSO questSO = null;
@@ -133,6 +138,7 @@ namespace RealmRush.Editables
                     break;
             }
             
+            // Set common fields
             questSO.questName = _questTitle;
             questSO.questDescription = _questDescription;
             questSO.goalCount = _goalCount;
@@ -147,6 +153,7 @@ namespace RealmRush.Editables
             AssetDatabase.SaveAssets();
         }
 
+        // Validates that all necessary fields are filled
         private bool CheckForAllFilledFields()
         {
             if (string.IsNullOrWhiteSpace(_questTitle))
@@ -205,6 +212,7 @@ namespace RealmRush.Editables
 
         #region MethodsForLoadingExistingQuest()
         
+        // UI for loading existing quests from the project
         private void SetLoadExistingQuest()
         {
             EditorGUILayout.Space();
@@ -226,6 +234,7 @@ namespace RealmRush.Editables
             }
         }
 
+        // Loads ScriptableObjects from the quest directory
         private void LoadExistingQuest()
         {
             string[] guids = AssetDatabase.FindAssets($"t:QuestSO",new[]{"Assets/ScriptableObjects/Quests"});
@@ -241,6 +250,7 @@ namespace RealmRush.Editables
             }
         }
         
+        // Fills the editor fields with data from the selected quest
         private void LoadExistingQuestData(QuestSO questSO)
         {
             selectedQuest = questSO;
@@ -269,6 +279,7 @@ namespace RealmRush.Editables
             Repaint();
         }
 
+        // Overwrites the loaded quest with updated values
         private void SaveSelectedQuest(QuestSO questSO)
         {
             questSO.questName = _questTitle;
