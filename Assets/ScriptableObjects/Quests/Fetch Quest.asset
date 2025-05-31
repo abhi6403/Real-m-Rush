@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdf0f7a60d5c045478e12f9afe89fe2f, type: 3}
   m_Name: Fetch Quest
   m_EditorClassIdentifier: 
-  questName: Fetch Quest
-  questDescription: asdasdsad
+  questType: 0
+  questName: Changes
+  questDescription: asasaa
   goalCount: 3
-  rewardText: asjdhas
+  reward: 2333
   currentCount: 0
   isCompleted: 0
+  collectiblePrefab: {fileID: 0}

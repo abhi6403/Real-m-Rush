@@ -1,26 +1,40 @@
+using System.IO;
 using RealmRush.Quest;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.Windows;
+using Directory = UnityEngine.Windows.Directory;
 
 namespace RealmRush.Editables
 {
     public class QuestEditor : EditorWindow
     {
-        private string _questTitle;
-        private string _questDescription;
-        private int _goalCount;
-        private QuestType _questType;
-        private int _reward;
+        #region VariablesForCreatingNewQuest
+
+          private string _questTitle;
+          private string _questDescription;
+          private int _goalCount;
+          private QuestType _questType;
+          private int _reward;
+          
+          private GameObject _collectibleObject;
+  
+          private GameObject _enemyObject;
+  
+          private GameObject _exploreZone;
+          
+          private const string questSavePath = "Assets/ScriptableObjects/Quests/";
+
+        #endregion
         
-        private GameObject _collectibleObject;
+        #region VariablesForExistingQuests
 
-        private GameObject _enemyObject;
-
-        private GameObject _exploreZone;
+        private string[] existingQuestPaths;
+        private QuestSO[] existingQuests;
+        private int selectedQuestIndex;
+        private QuestSO selectedQuest = null;
         
-        private const string questSavePath = "Assets/ScriptableObjects/Quests/";
-
+        #endregion
+        
         [MenuItem("RealmRush Tools/ Quest Editor")]
         public static void OpenQuestWindow()
         {
@@ -37,8 +51,18 @@ namespace RealmRush.Editables
             
             EditorGUILayout.Space();
             SetCreateButton();
+            
+            if (GUILayout.Button("Save Changes") && selectedQuest != null)
+            {
+                SaveSelectedQuest(selectedQuest);
+            }
+            
+            EditorGUILayout.Space();
+            SetLoadExistingQuest();
         }
 
+        #region MethodsForCreatingNewQuest
+        
         private void GeneralFields()
         {
             _questType = (QuestType)EditorGUILayout.EnumPopup("Quest Type", _questType);
@@ -146,21 +170,21 @@ namespace RealmRush.Editables
                 case QuestType.FETCH:
                     if (!_collectibleObject)
                     {
-                        EditorUtility.DisplayDialog("Empty Object","Please add an game object","Do it now");
+                        EditorUtility.DisplayDialog("Empty Collectible Object","Please add an game object","Do it now");
                         return false;
                     }
                     break;
                 case QuestType.KILL:
                     if (!_enemyObject)
                     {
-                        EditorUtility.DisplayDialog("Empty Object","Please add an game object","Do it now");
+                        EditorUtility.DisplayDialog("Empty Enemy Object","Please add an game object","Do it now");
                         return false;
                     }
                     break;
                 case QuestType.EXPLORE:
                     if (!_exploreZone)
                     {
-                        EditorUtility.DisplayDialog("Empty Object","Please add an game object","Do it now");
+                        EditorUtility.DisplayDialog("Empty Exploring Object","Please add an game object","Do it now");
                         return false;
                     }
                     break;
@@ -172,7 +196,105 @@ namespace RealmRush.Editables
                 return false;
             }
             
-           return true;
+            return true;
         }
+        
+        #endregion
+
+        #region MethodsForLoadingExistingQuest()
+        
+        private void SetLoadExistingQuest()
+        {
+            EditorGUILayout.Space();
+            GUILayout.Label("Load Existing Quest", EditorStyles.boldLabel);
+
+            if (GUILayout.Button("Load Quest list"))
+            {
+                LoadExistingQuest();
+            }
+
+            if (existingQuests != null && existingQuests.Length > 0)
+            {
+                selectedQuestIndex = EditorGUILayout.Popup("Selected Quest", selectedQuestIndex, existingQuestPaths);
+
+                if (GUILayout.Button("Load Selected Quest"))
+                {
+                    LoadExistingQuestData(existingQuests[selectedQuestIndex]);
+                }
+            }
+        }
+
+        private void LoadExistingQuest()
+        {
+            string[] guids = AssetDatabase.FindAssets($"t:QuestSO",new[]{"Assets/ScriptableObjects/Quests"});
+            
+            existingQuests = new QuestSO[guids.Length];
+            existingQuestPaths = new string[guids.Length];
+
+            for (int i = 0; i < guids.Length; i++)
+            {
+                string path = AssetDatabase.GUIDToAssetPath(guids[i]);
+                existingQuests[i] = AssetDatabase.LoadAssetAtPath<QuestSO>(path);
+                existingQuestPaths[i] = Path.GetFileNameWithoutExtension(path);
+            }
+        }
+        
+        private void LoadExistingQuestData(QuestSO questSO)
+        {
+            selectedQuest = questSO;
+            _questTitle = questSO.questName;
+            _questDescription = questSO.questDescription;
+            _goalCount = questSO.goalCount;
+            _questType = questSO.questType;
+            _reward = questSO.reward;
+
+            switch (_questType)
+            {
+                case QuestType.FETCH:
+                    var fetch = questSO as FetchQuestSO;
+                    _collectibleObject = fetch.collectiblePrefab;
+                    break;
+                case QuestType.KILL:
+                    var kill = questSO as KillQuestSO;
+                    _enemyObject = kill.killPrefab;
+                    break;
+                case QuestType.EXPLORE:
+                    var explore = questSO as ExploreQuestSO;
+                    _exploreZone = explore.exploreTrigger;
+                    break;
+            }
+            
+            Repaint();
+        }
+
+        private void SaveSelectedQuest(QuestSO questSO)
+        {
+            questSO.questName = _questTitle;
+            questSO.questDescription = _questDescription;
+            questSO.goalCount = _goalCount;
+            questSO.questType = _questType;
+            questSO.reward = _reward;
+
+            switch (_questType)
+            {
+                case QuestType.FETCH:
+                    var fetch = questSO as FetchQuestSO;
+                    fetch.collectiblePrefab = _collectibleObject;
+                    break;
+                case QuestType.KILL:
+                    var kill = questSO as KillQuestSO;
+                    kill.killPrefab = _enemyObject;
+                    break;
+                case QuestType.EXPLORE:
+                    var explore = questSO as ExploreQuestSO;
+                    explore.exploreTrigger = _exploreZone;
+                    break;
+            }
+            
+            EditorUtility.DisplayDialog("Update Successfull", "Changes was succussfully saved", "OK");
+            EditorUtility.SetDirty(questSO);
+            AssetDatabase.SaveAssets();
+        }
+        #endregion
     }
 }

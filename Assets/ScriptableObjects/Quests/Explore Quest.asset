@@ -16,7 +16,7 @@ MonoBehaviour:
   questName: Explore
   questDescription: asdasd
   goalCount: 1
-  reward: 0
+  reward: 1500
   currentCount: 0
   isCompleted: 0
   exploreTrigger: {fileID: 0}
