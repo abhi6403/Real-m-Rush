@@ -67,7 +67,9 @@ namespace RealmRush.Editables
         {
             _questType = (QuestType)EditorGUILayout.EnumPopup("Quest Type", _questType);
             
+            GUI.color = string.IsNullOrEmpty(_questTitle) ? Color.red : Color.white;
             _questTitle = EditorGUILayout.TextField("Quest Name", _questTitle);
+            GUI.color = Color.white;
             
             _questDescription = EditorGUILayout.TextField("Description", _questDescription);
             _goalCount = EditorGUILayout.IntField("Goal", _goalCount);

@@ -5,9 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8d72cf91-5c19-47ca-8a2b-0fda9a6fdd3d" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Realm Rush/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Realm Rush/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ScriptableObjects/Quests/Explore Quest.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ScriptableObjects/Quests/Explore Quest.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/ScriptableObjects/Quests/Fetch Quest.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/ScriptableObjects/Quests/Fetch Quest.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Editor/QuestEditor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Editor/QuestEditor.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -114,7 +111,7 @@
       <updated>1748333027757</updated>
       <workItem from="1748333029306" duration="18300000" />
       <workItem from="1748395962629" duration="26790000" />
-      <workItem from="1748572685141" duration="19980000" />
+      <workItem from="1748572685141" duration="20280000" />
     </task>
     <servers />
   </component>
