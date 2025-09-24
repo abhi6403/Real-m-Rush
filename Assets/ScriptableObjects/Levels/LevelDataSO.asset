@@ -16,4 +16,4 @@ MonoBehaviour:
   - MapID: 1
     PillarPrefab: {fileID: 6451158461328132417, guid: 276a508a8d29f4e4ab43fabfbf03f364, type: 3}
     TargetNumber: 20
-    startPosition: {x: 498.41, y: 3.64, z: 360}
+    startPosition: {x: 498.41, y: 3.64, z: 364}
