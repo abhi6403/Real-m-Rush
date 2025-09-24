@@ -90,5 +90,10 @@ namespace RealmRush.Player
                 }
             }
         }
+        
+        public Vector3 GetMoveDirection()
+        {
+            return _playerModel.moveDirection;
+        }
     }
 }

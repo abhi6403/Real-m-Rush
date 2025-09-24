@@ -7,7 +7,7 @@ namespace RealmRush.Player
         public float walkSpeed = 7f;
         public float runSpeed = 12f;
         public float jumpPower = 7f;
-        public float gravity = 10f;
+        public float gravity = 12f;
         public float lookSpeed = 2f;
         public float lookXLimit = 45f;
         public float damage = 25f;

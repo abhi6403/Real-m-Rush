@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questType: 0
   questName: Changes
-  questDescription: asasaa
+  questDescription: changed now
   goalCount: 3
   reward: 2333
   currentCount: 0

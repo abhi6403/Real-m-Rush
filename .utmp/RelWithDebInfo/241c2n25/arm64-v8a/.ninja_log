@@ -1,0 +1,12 @@
+# ninja log v5
+79	475	7804030411525658	FramePacing/CMakeFiles/swappywrapper.dir/UnitySwappyWrapper.cpp.o	34ab20d540e758b
+476	1033	7804030416556502	E:/Company/Aadvaita Interactive/Realm Rush/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/241c2n25/obj/arm64-v8a/libswappywrapper.so	c91ae92bb4ea420c
+25	1325	7804030419956032	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	7eebc374aa9ae6c3
+17	1335	7804030419991329	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	e1323752ded69cd2
+34	1352	7804030420208185	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	ef22fb4496881564
+55	1354	7804030420284311	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	982b33d21e20d6d8
+68	1449	7804030421248984	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	4e23c1b8f1b76fa6
+1	1524	7804030422009096	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	8b3961690a47f566
+44	1700	7804030423836122	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	d98eb936b763898c
+9	1764	7804030424493969	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	d5fcba3a0abbad5b
+1765	1862	7804030425512470	E:/Company/Aadvaita Interactive/Realm Rush/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/241c2n25/obj/arm64-v8a/libgame.so	65de863db371e109

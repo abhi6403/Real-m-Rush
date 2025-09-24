@@ -36,5 +36,10 @@ namespace RealmRush.Player
         }
 
         public void DestroyHitEffect(GameObject hitParticleEffect) => Destroy(hitParticleEffect,2f);
+
+        public PlayerController GetPlayerController()
+        {
+            return _playerController;
+        }
     }
 }

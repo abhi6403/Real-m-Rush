@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questType: 2
   questName: Explore
-  questDescription: asdasd
+  questDescription: jhgbjh
   goalCount: 1
   reward: 1500
   currentCount: 0
