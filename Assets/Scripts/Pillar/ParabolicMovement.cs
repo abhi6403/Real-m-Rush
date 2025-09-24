@@ -22,10 +22,12 @@ public class ParabolicMovement : MonoBehaviour
 
     // Reference to the player's controller
     private RealmRush.Player.PlayerController playerController;
+    private PillarView pillarView;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        pillarView = GetComponent<PillarView>();
         if (rb == null) rb = gameObject.AddComponent<Rigidbody>();
         rb.isKinematic = true;
 
@@ -125,6 +127,8 @@ public class ParabolicMovement : MonoBehaviour
             if (playerView != null)
             {
                 playerController = playerView.GetPlayerController();
+                pillarView.CheckWithPlayer(playerView);
+                //pillarView.SetPlayerPillarNumber(playerView);
             }
 
             if (!hasChosenTarget)
@@ -142,6 +146,7 @@ public class ParabolicMovement : MonoBehaviour
             startMoving = false;
             player = null;
             playerController = null;
+            Destroy(gameObject);
         }
     }
 }

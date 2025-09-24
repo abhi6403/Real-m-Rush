@@ -1,4 +1,5 @@
 using RealmRush.Quest;
+using UnityEngine;
 
 namespace RealmRush.Events
 {
@@ -8,6 +9,8 @@ namespace RealmRush.Events
         public EventController OnKilled { get; private set; }
         public EventController OnExplored { get; private set; }
         public EventController OnGameCompleted { get; private set; }
+        public EventController<Vector3> SetPlayerPosition { get; private set; }
+        public EventController OnGameStarted { get; private set; }
         
         public EventController<QuestSO> OnFetchQuest { get; private set; }
         public EventController<QuestSO> OnKillQuest { get; private set; }
@@ -15,6 +18,8 @@ namespace RealmRush.Events
 
         public EventService()
         {
+            SetPlayerPosition = new EventController<Vector3>();
+            OnGameStarted = new EventController();
             OnItemCollected = new EventController();
             OnKilled = new EventController();
             OnExplored = new EventController();

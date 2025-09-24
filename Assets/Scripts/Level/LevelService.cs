@@ -1,3 +1,4 @@
+using RealmRush.Main;
 using UnityEngine;
 
 public class LevelService
@@ -9,9 +10,14 @@ public class LevelService
     {
         _levelDataSO = levelDataSO;
         _startPosition = levelDataSO.LevelDatas[0].startPosition;
+        AddListeners();
         SpawnPillars();
     }
 
+    private void AddListeners()
+    {
+        GameService.Instance.EventService.OnGameStarted.AddListener(SetPlayerPosition);
+    }
     private void SpawnPillars()
     {
         for (int i = 0; i <= _levelDataSO.LevelDatas[0].TargetNumber; i++)
@@ -20,5 +26,10 @@ public class LevelService
             obj.AsignPillarNumber(i);
             _startPosition = new Vector3(_startPosition.x, _startPosition.y, _startPosition.z - 6);
         }
+    }
+
+    private void SetPlayerPosition()
+    {
+        GameService.Instance.EventService.SetPlayerPosition.InvokeEvent(_levelDataSO.LevelDatas[0].startPosition);
     }
 }
